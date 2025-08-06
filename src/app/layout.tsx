@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-// import { AutoConnectClient } from "@/components/AutoConnectClient";
+import { Navbar } from "@/components/modules/wallet";
+import { AutoConnectClient } from "@/components/modules/auth/ui/AutoConnectClient";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <AutoConnectClient /> */}
+        <AutoConnectClient />
         <Navbar />
         <main className="min-h-screen bg-gray-50">{children}</main>
       </body>

@@ -1,46 +1,28 @@
 import { Buffer } from "buffer";
-import { Address } from '@stellar/stellar-sdk';
 import {
   AssembledTransaction,
   Client as ContractClient,
   ClientOptions as ContractClientOptions,
   MethodOptions,
-  Result,
   Spec as ContractSpec,
-} from '@stellar/stellar-sdk/contract';
-import type {
-  u32,
-  i32,
-  u64,
-  i64,
-  u128,
-  i128,
-  u256,
-  i256,
-  Option,
-  Typepoint,
-  Duration,
-} from '@stellar/stellar-sdk/contract';
-export * from '@stellar/stellar-sdk'
-export * as contract from '@stellar/stellar-sdk/contract'
-export * as rpc from '@stellar/stellar-sdk/rpc'
+} from "@stellar/stellar-sdk/contract";
+import type { i128 } from "@stellar/stellar-sdk/contract";
+export * from "@stellar/stellar-sdk";
+export * as contract from "@stellar/stellar-sdk/contract";
+export * as rpc from "@stellar/stellar-sdk/rpc";
 
-if (typeof window !== 'undefined') {
-  //@ts-ignore Buffer exists
+if (typeof window !== "undefined") {
   window.Buffer = window.Buffer || Buffer;
 }
-
 
 export const networks = {
   testnet: {
     networkPassphrase: "Test SDF Network ; September 2015",
     contractId: "CAIUMHVHWCGKVHTK55JYGZ3Z5N73T5GTLWRHMNCZF5MHGODTMVFQI3KJ",
-  }
-} as const
+  },
+} as const;
 
-export const Errors = {
-
-}
+export const Errors = {};
 
 export interface Client {
   /**
@@ -61,7 +43,7 @@ export interface Client {
      * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
      */
     simulate?: boolean;
-  }) => Promise<AssembledTransaction<i128>>
+  }) => Promise<AssembledTransaction<i128>>;
 
   /**
    * Construct and simulate a get transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
@@ -81,8 +63,7 @@ export interface Client {
      * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
      */
     simulate?: boolean;
-  }) => Promise<AssembledTransaction<i128>>
-
+  }) => Promise<AssembledTransaction<i128>>;
 }
 export class Client extends ContractClient {
   static async deploy<T = Client>(
@@ -97,17 +78,19 @@ export class Client extends ContractClient {
         format?: "hex" | "base64";
       }
   ): Promise<AssembledTransaction<T>> {
-    return ContractClient.deploy(null, options)
+    return ContractClient.deploy(null, options);
   }
   constructor(public readonly options: ContractClientOptions) {
     super(
-      new ContractSpec([ "AAAAAAAAAAAAAAAFY2xpY2sAAAAAAAAAAAAAAQAAAAs=",
-        "AAAAAAAAAAAAAAADZ2V0AAAAAAAAAAABAAAACw==" ]),
+      new ContractSpec([
+        "AAAAAAAAAAAAAAAFY2xpY2sAAAAAAAAAAAAAAQAAAAs=",
+        "AAAAAAAAAAAAAAADZ2V0AAAAAAAAAAABAAAACw==",
+      ]),
       options
-    )
+    );
   }
   public readonly fromJSON = {
     click: this.txFromJSON<i128>,
-        get: this.txFromJSON<i128>
-  }
+    get: this.txFromJSON<i128>,
+  };
 }

@@ -5,6 +5,7 @@ export function useWallet() {
     // State
     keyId,
     contractId,
+    balance,
     isLoading,
     error,
 
@@ -20,6 +21,7 @@ export function useWallet() {
     // State
     keyId,
     contractId,
+    balance,
     isLoading,
     error,
 
